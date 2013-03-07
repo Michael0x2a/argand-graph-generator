@@ -1,3 +1,4 @@
 @echo off
-start bin/graph_gen.exe %1
-exit
+cd /d "%~dp0"
+start bin/graph_gen.exe "%~f1"
+exit /b

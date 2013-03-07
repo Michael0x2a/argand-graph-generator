@@ -7,11 +7,11 @@ Usage:
 '''
 
 import sys
+import traceback
 
 import script_parser
 import renderer
 import errors
-
 
 def get_file():
     '''Gets the filename of the script to parse, and does some
@@ -36,4 +36,10 @@ def main():
     plot.show()
         
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except Exception as err:
+        error = traceback.format_exc()
+        errors.log('Top-level exception: ' + error)
+    
+    

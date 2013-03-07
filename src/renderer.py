@@ -25,8 +25,14 @@ class Plot(object):
         
     def add_axis_labels(self):
         '''Correctly formats the tick labels based on the script object'''
-        x_format_func = lambda x, pos: '{0}'.format(x)
-        y_format_func = lambda y, pos: '{0}i'.format(y) if y != 0 else ''
+        def fix(string):
+            if string.startswith('.'):
+                string = '0' + string
+            if string.endswith('.'):
+                string = string + '0'
+            return string
+        x_format_func = lambda x, pos: fix(('%F' % x).strip('0'))
+        y_format_func = lambda y, pos: fix(('%F' % y).strip('0')) + 'i' if y != 0 else ''
         x_formatter = matplotlib.ticker.FuncFormatter(x_format_func)
         y_formatter = matplotlib.ticker.FuncFormatter(y_format_func)
         
@@ -66,3 +72,4 @@ class Plot(object):
         '''Makes a window appear showing the axis. This is a blocking call:
         the script pauses until the window is closed.'''
         pyplot.show()
+        
