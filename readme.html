@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Readme</title>
+    <style type="text/css">
+        body{
+            font-size:12pt;
+            padding:1em;
+            font-family:garamond, serif;
+            background-color:#eee;
+        }
+        #wrapper{
+            max-width:50em;
+            background-color:#fff;
+            padding:2em;
+            margin:0 auto;
+            border-radius:.5em;
+            position:relative;
+        }
+        h1,h2,h3,h4,h5,h6{
+            font-family:"Trebuchet MS", sans-serif;
+        }
+        .command{
+            color:red;
+            font-weight:700;
+        }
+        .expression,.exp1{
+            color:blue;
+            font-weight:700;
+        }
+        .exp2{
+            color:darkmagenta;
+            font-weight:700;
+        }
+        .color{
+            color:darkorange;
+            font-weight:700;
+        }
+        pre{
+            border-left:.5em solid green;
+            padding-left:1em;
+            font-family:consolas, mono;
+            font-size:11pt;
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper">
+
+<h1>Readme</h1>
+
+
+<p>This is a short program meant to help you make graphs for the IA. You write a small
+text file containing some basic commands. These text files list out where to draw points,
+lines, circles, etc.</p>
+
+<p>Then, inside Windows Explorer, drag and drop your text file on top of 
+<code>DROP_OVER_ME.bat</code> file. This will make a window appear with the graph. Using 
+the buttons on the bottom, you can zoom in or examine the graph, and save it as a 
+<code>.png</code> file when you're happy.</p>
+
+<p>This program was tailor-made for this IA, so it's deliberately designed to be 
+somewhat basic.</p>
+
+<hr />
+
+<p>Here is an example file, and the graph it will generate. A detailed breakdown of
+how this file was produced is included below. You can see both this image and the
+script file used to produce it inside the <code>examples</code> folder.</p>
+
+<img src="examples/full_example.png" />
+
+<pre><code>% Any line that starts with '%' is a comment and is 
+% ignored by the program.
+
+% These set the x and y axises, and the interval 
+% between each tick.
+<span class="command">xrange</span>      <span class="exp1">-5,</span> <span class="exp2">7</span>
+<span class="command">xinterval</span>    <span class="exp1">2.0</span>
+<span class="command">yrange</span>      <span class="exp1">-5,</span> <span class="exp2">7</span>
+<span class="command">yinterval</span>    <span class="exp1">2.0</span>
+
+% Draws a circle of radius 2.
+<span class="command">circle</span> <span class="exp1">2</span>
+
+% Draws a point at (1, 2). Note that I'm using square 
+% brackets for all cartesian coordinates.
+<span class="command">point</span> <span class="exp1">[1, 2]</span>
+
+% You can plug in arbitrary math expressions. The order 
+% of operations is respected. The constant 'pi' and the 
+% sqrt function are provided.
+<span class="command">point</span> <span class="exp1">[1 - (2 * 1.5), pi * sqrt(3)]</span>
+
+% You can also use complex numbers instead of cartesian 
+% coordinates. Note there is no implicit multiplication: 
+% you always have to do 3 * i, not 3i.
+% Therefore, writing [2, 2] is equivalent to writing 
+% 2 + 2 * i
+<span class="command">point</span> <span class="exp1">-pi + sqrt(3) * i</span>
+
+% You can add color to any line, point, circle, or text 
+% you add by adding an exclamation mark and the color 
+% name. See: 
+% <a href="http://www.w3schools.com/html/html_colornames.asp">http://www.w3schools.com/html/html_colornames.asp</a>
+% for a list of all valid colors.
+<span class="command">point</span> <span class="exp1">1 - i</span> <span class="color">! red</span>
+
+% You can draw lines between two points. Separate each 
+% complex number/coordinate with a comma.
+<span class="command">line</span> <span class="exp1">[0, 0],</span> <span class="exp2">[2, 2]</span>
+<span class="command">line</span> <span class="exp1">-i,</span> <span class="exp2">5 + i</span> <span class="color">! aqua</span>
+
+% You can draw circles. All circles are centered around 
+% the origin, and the number following is the radius.
+<span class="command">circle</span> <span class="exp1">3.5</span> <span class="color">! red</span>
+<span class="command">circle</span> <span class="exp1">2</span> <span class="color">! green</span>
+
+% You can add text. The first argument is the coordinate
+% where the text starts. The second argument is the text
+% to display. Note that it's surrounded by quote marks. 
+% To make text display on more than one line, use the 
+% '\n' symbol whenever you want a newline.
+<span class="command">text</span> <span class="exp1">[3, -3.5],</span> <span class="exp2">"This is some text\nBlah blah blah."</span>
+
+% You can define variables so you can refer to 
+% coordinates without constantly having to rewrite them. 
+% Here, I'm creating a variable called 'p1' which is 
+% equal to the cartesian coordinate [4, 4]. Note the 
+% comma between the variable name and the coordinate.
+<span class="command">assign</span> <span class="exp1">p1,</span> <span class="exp2">[4, 4]</span>
+
+% To use a variable, place it where you would normally 
+% have a coordinate or complex number and prefix it 
+% with the '@' symbol. 
+% Don't forget about that '@' symbol!
+<span class="command">point</span> <span class="exp1">@p1</span> <span class="color">! orange</span>
+<span class="command">line</span> <span class="exp1">[5, 5],</span> <span class="exp2">@p1</span> <span class="color">! green</span>
+<span class="command">line</span> <span class="exp1">[3, 5],</span> <span class="exp2">@p1</span> <span class="color">! green</span>
+<span class="command">line</span> <span class="exp1">[5, 3],</span> <span class="exp2">@p1</span> <span class="color">! green</span>
+<span class="command">line</span> <span class="exp1">[3, 3],</span> <span class="exp2">@p1</span> <span class="color">! green</span>
+</code></pre>
+
+<p>As you can see, each line in general takes the basic form:</p>
+
+<pre><code><span class="command">command</span> <span class="exp1">argument1,</span> <span class="exp2">argument2</span> <span class="color">! optional_color</span></code></pre>
+
+<p>...where each line starts with a command, one or two arguments (separated by a comma), and 
+an optional color.</p>
+
+<hr />
+
+<p>Here is another example file to help get you started:</p>
+
+<pre><code><span class="command">xrange</span> <span class="exp1">-1.3,</span> <span class="exp2">1.3
+<span class="command">yrange</span> <span class="exp1">-1.3,</span> <span class="exp2">1.3
+<span class="command">xinterval</span> <span class="exp1">.2</span>
+<span class="command">yinterval</span> <span class="exp1">.2</span>
+
+<span class="command">assign</span> <span class="exp1">p1,</span> <span class="exp2">1</span>
+<span class="command">assign</span> <span class="exp1">p2,</span> <span class="exp2">-1/4 + sqrt(5)/4 + i*sqrt(sqrt(5)/8 + 5/8)</span>
+
+<span class="command">point</span> <span class="exp1">@p1</span>
+<span class="command">point</span> <span class="exp1">@p2</span>
+<span class="command">point</span> <span class="exp1">-sqrt(5)/4 - 1/4 + i*sqrt(-sqrt(5)/8 + 5/8)</span>
+<span class="command">point</span> <span class="exp1">-sqrt(5)/4 - 1/4 - i*sqrt(-sqrt(5)/8 + 5/8)</span>
+<span class="command">point</span> <span class="exp1">-1/4 + sqrt(5)/4 - i*sqrt(sqrt(5)/8 + 5/8)</span>
+
+<span class="command">circle</span> <span class="exp1">1</span> <span class="color">! green</span>
+
+<span class="command">line</span> <span class="exp1">@p1,</span> <span class="exp2">@p2</span> <span class="color">! red</span>
+</pre></code>
+
+<img src="examples/simple_example.png" />
+
+<hr />
+
+<p>Michael Lee &mdash; This project is licensed under the <a href="http://opensource.org/licenses/MIT">MIT License</a></p>
+</div>
+</body>
+</html>
