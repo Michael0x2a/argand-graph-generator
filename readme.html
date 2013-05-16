@@ -67,11 +67,19 @@ somewhat basic.</p>
 
 <hr />
 
+<p><strong>Warning!</strong></p>
+
+<p>Do not delete or change anything inside the <code>bin</code> folder. That'll stop
+the program from working. This readme/the batch file also uses stuff from inside
+that folder, so moving the readme or batch file to a new location will break them.</p>
+
+<hr />
+
 <p>Here is an example file, and the graph it will generate. A detailed breakdown of
 how this file was produced is included below. You can see both this image and the
 script file used to produce it inside the <code>examples</code> folder.</p>
 
-<img src="examples/full_example.png" />
+<img src="bin/full_example.png" />
 
 <pre><code>% Any line that starts with '%' is a comment and is 
 % ignored by the program.
@@ -131,7 +139,7 @@ script file used to produce it inside the <code>examples</code> folder.</p>
 % Here, I'm creating a variable called 'p1' which is 
 % equal to the cartesian coordinate [4, 4]. Note the 
 % comma between the variable name and the coordinate.
-<span class="command">assign</span> <span class="exp1">p1,</span> <span class="exp2">[4, 4]</span>
+<span class="command">variable</span> <span class="exp1">p1,</span> <span class="exp2">[4, 4]</span>
 
 % To use a variable, place it where you would normally 
 % have a coordinate or complex number and prefix it 
@@ -160,8 +168,8 @@ an optional color.</p>
 <span class="command">xinterval</span> <span class="exp1">.2</span>
 <span class="command">yinterval</span> <span class="exp1">.2</span>
 
-<span class="command">assign</span> <span class="exp1">p1,</span> <span class="exp2">1</span>
-<span class="command">assign</span> <span class="exp1">p2,</span> <span class="exp2">-1/4 + sqrt(5)/4 + i*sqrt(sqrt(5)/8 + 5/8)</span>
+<span class="command">variable</span> <span class="exp1">p1,</span> <span class="exp2">1</span>
+<span class="command">variable</span> <span class="exp1">p2,</span> <span class="exp2">-1/4 + sqrt(5)/4 + i*sqrt(sqrt(5)/8 + 5/8)</span>
 
 <span class="command">point</span> <span class="exp1">@p1</span>
 <span class="command">point</span> <span class="exp1">@p2</span>
@@ -174,7 +182,7 @@ an optional color.</p>
 <span class="command">line</span> <span class="exp1">@p1,</span> <span class="exp2">@p2</span> <span class="color">! red</span>
 </pre></code>
 
-<img src="examples/simple_example.png" />
+<img src="bin/simple_example.png" />
 
 <hr />
 
